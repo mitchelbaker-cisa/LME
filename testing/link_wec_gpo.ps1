@@ -1,5 +1,5 @@
 # This script will ask the user for 2 things: the domain name, and the name of the OU for their 'hosts'
-# After that information is collection it will link the GPO's created with the import_gpo script to the Domain Controllers OU and the custom host OU.
+# After that information is collected it will link the GPO's created with the import_gpo script to the Domain Controllers OU and the custom host OU.
 
 Import-Module ActiveDirectory
 
