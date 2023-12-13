@@ -522,7 +522,7 @@ function data_retention() {
   if [ "$DISK_80" -lt 30 ]; then
     echo -e "\e[31m[!]\e[0m LME Requires 128GB of space usable for log retention - exiting"
     exit 1
-  elif [ "$DISK_80" -ge 90 ] && [ "$DISK_80" -le 179 ]; then
+  elif [ "$DISK_80" -ge 30 ] && [ "$DISK_80" -le 179 ]; then
     RETENTION="30"
   elif [ "$DISK_80" -ge 180 ] && [ "$DISK_80" -le 359 ]; then
     RETENTION="90"
