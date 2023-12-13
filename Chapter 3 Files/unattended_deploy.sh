@@ -302,23 +302,39 @@ function generatekibanacert() {
 }
 
 function populatecerts() {
-  #add to docker secrets
   echo -e "\e[32m[X]\e[0m Adding certificates and keys to Docker"
 
-  #ca cert
+  # ca cert
+  echo "Creating Docker secret for CA certificate"
   docker secret create ca.crt certs/root-ca.crt
+  echo "CA certificate secret created"
 
-  #logstash
+  # logstash
+  echo "Creating Docker secret for Logstash key"
   docker secret create logstash.key certs/logstash.key
+  echo "Logstash key secret created"
+
+  echo "Creating Docker secret for Logstash certificate"
   docker secret create logstash.crt certs/logstash.crt
+  echo "Logstash certificate secret created"
 
-  #elasticsearch server
+  # elasticsearch server
+  echo "Creating Docker secret for Elasticsearch key"
   docker secret create elasticsearch.key certs/elasticsearch.key
-  docker secret create elasticsearch.crt certs/elasticsearch.crt
+  echo "Elasticsearch key secret created"
 
-  #kibana server
+  echo "Creating Docker secret for Elasticsearch certificate"
+  docker secret create elasticsearch.crt certs/elasticsearch.crt
+  echo "Elasticsearch certificate secret created"
+
+  # kibana server
+  echo "Creating Docker secret for Kibana key"
   docker secret create kibana.key certs/kibana.key
+  echo "Kibana key secret created"
+
+  echo "Creating Docker secret for Kibana certificate"
   docker secret create kibana.crt certs/kibana.crt
+  echo "Kibana certificate secret created"
 }
 
 function removecerts() {
@@ -402,7 +418,16 @@ function initdockerswarm() {
 }
 
 function deploylme() {
-  docker stack deploy lme --compose-file /opt/lme/Chapter\ 3\ Files/docker-compose-stack-live.yml
+  echo -e "\e[32m[X]\e[0m Starting deployment of Docker stack"
+  deployment_output=$(docker stack deploy lme --compose-file /opt/lme/Chapter\ 3\ Files/docker-compose-stack-live.yml 2>&1)
+  deployment_status=$?
+  echo "$deployment_output"
+  if [ $deployment_status -ne 0 ]; then
+    echo -e "\e[31m[!]\e[0m Deployment failed with status code $deployment_status"
+    exit $deployment_status
+  else
+    echo -e "\e[32m[X]\e[0m Deployment completed successfully"
+  fi
 }
 
 get_distribution() {
