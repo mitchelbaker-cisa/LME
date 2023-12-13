@@ -49,12 +49,12 @@ function customlogstashconf() {
 function generatepasswords() {
   echo "Starting generatepasswords"
 
-  elastic_user_pass=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-  kibana_system_pass=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-  logstash_system_pass=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-  logstash_writer=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-  update_user_pass=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
-  kibanakey=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 42 | head -n 1)
+  elastic_user_pass="TestPassword1"
+  kibana_system_pass="TestPassword2"
+  logstash_system_pass="TestPassword3"
+  logstash_writer="TestPassword4"
+  update_user_pass="TestPassword5"
+  kibanakey="TestKey1234567890"
 
   echo -e "\e[32m[X]\e[0m Updating logstash configuration with logstash writer"
   cp /opt/lme/Chapter\ 3\ Files/logstash.conf /opt/lme/Chapter\ 3\ Files/logstash.edited.conf
