@@ -47,6 +47,7 @@ function customlogstashconf() {
 }
 
 function generatepasswords() {
+  echo "Starting generatepasswords"
 
   elastic_user_pass=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
   kibana_system_pass=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 32 | head -n 1)
