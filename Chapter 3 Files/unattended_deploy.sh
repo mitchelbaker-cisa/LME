@@ -1,11 +1,15 @@
 #!/bin/bash
 
-# Source the deploy.sh script from the same directory
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-source "$DIR/deploy.sh"
+  DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+  source "$DIR/deploy.sh"
 
   # The generate passwords commands do not work in github actions. Need to find a new way to perform this function in order to remove this and use original logic.
 function generatepasswords() {
+
+  # Source the deploy.sh script from the same directory
+  DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+  source "$DIR/deploy.sh"
+  
   echo "Starting generatepasswords"
 
   elastic_user_pass="TestPassword1"
@@ -22,6 +26,9 @@ function generatepasswords() {
 
   # This function only included until data retention logic is fixed
 function data_retention() {
+
+  DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+  source "$DIR/deploy.sh"
   #show ext4 disk
   DF_OUTPUT="$(df -h -l -t ext4 --output=source,size /var/lib/docker)"
 
@@ -95,6 +102,7 @@ function data_retention() {
 }
 
 function unattended_install() {
+
   echo -e "\e[32m[X]\e[0m Updating OS software"
   apt update && apt upgrade -y
 
@@ -254,10 +262,13 @@ fi
 cd "$DIR" || exit
 
 #What action is the user wanting to perform
-if [ "$1" == "" ]; then
-  usage
-elif [ "$1" == "unattended" ]; then
-  unattended_install
-else
-  usage
-fi
+case "$1" in
+  unattended)
+    unattended_install
+    ;;
+  *)
+    echo -e "\e[31m[!]\e[0m Invalid operation specified"
+    echo "Usage:    $0 unattended"
+    exit 1
+    ;;
+esac
