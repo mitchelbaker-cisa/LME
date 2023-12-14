@@ -1180,3 +1180,5 @@ elif [ "$1" == "update" ]; then
 elif [ "$1" == "unattended" ]; then
   unattended_install
 else
+  usage
+fi
