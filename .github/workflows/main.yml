@@ -11,8 +11,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Make script executable and run
+      - name: Move files and run script
         run: |
-          chmod +x "Chapter 3 Files/unattended_deploy.sh"
-          sudo "Chapter 3 Files/unattended_deploy.sh" unattended
+          sudo mkdir -p /opt/lme
+          sudo cp -r * /opt/lme/
+          cd /opt/lme
+          sudo chmod +x "/opt/lme/Chapter 3 Files/deploy.sh"
+          sudo "/opt/lme/Chapter 3 Files/deploy.sh" unattended
 
