@@ -16,6 +16,6 @@ jobs:
           sudo mkdir -p /opt/lme
           sudo cp -r * /opt/lme/
           cd /opt/lme
-          sudo chmod +x "/opt/lme/Chapter 3 Files/deploy.sh"
-          sudo "/opt/lme/Chapter 3 Files/deploy.sh" unattended
+          sudo chmod +x "/opt/lme/Chapter 3 Files/unattended_deploy.sh"
+          sudo "/opt/lme/Chapter 3 Files/unattended_deploy.sh" unattended
 
