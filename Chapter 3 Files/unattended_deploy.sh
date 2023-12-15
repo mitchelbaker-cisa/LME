@@ -704,7 +704,7 @@ function unattended_install() {
   logstaship=${LOGSTASH_IP:-$EXT_IP}
   logstashcn=${LOGSTASH_CN:-"ls1.lme.local"}
   selfsignedyn=${SELFSIGNED_YN:-"y"}
-  skipdinstall=${SKIP_DINSTALL:-"y"}
+  skipdinstall=${SKIP_DINSTALL:-"n"}
 
   if [ "$selfsignedyn" == "y" ]; then
     #make certs
