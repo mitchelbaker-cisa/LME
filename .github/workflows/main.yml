@@ -1,47 +1,18 @@
 ---
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'  # match basic semver tags
-  pull_request:
-    branches:
-      - main
+      - unattended-install
 
 jobs:
-  lint:
+  unattended_install_test:
     runs-on: ubuntu-latest
-    steps:
-      - name: Linters
-        run: true  # place-holder
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Tests
-        run: true  # place-holder
-
-  release:
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: [lint, test]
     steps:
       - name: Checkout
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+        uses: actions/checkout@v2
 
-      - name: Set up tag name
-        id: tag
-        run: echo "::set-output name=tag::${GITHUB_REF##*/}"
+      - name: Make script executable and run
+        run: |
+          chmod +x "Chapter 3 Files/unattended_deploy.sh"
+          sudo "Chapter 3 Files/unattended_deploy.sh" unattended
 
-      - name: Build
-        run: git ls-files | zip release-${{ steps.tag.outputs.tag }}.zip -@
-
-      - name: Release
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
-        with:
-          files: release-${{ steps.tag.outputs.tag }}.zip
-          draft: true
-          generate_release_notes: true
-          fail_on_unmatched_files: true
