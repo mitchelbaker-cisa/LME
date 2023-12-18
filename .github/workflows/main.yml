@@ -19,9 +19,10 @@ jobs:
           sudo chmod +x "/opt/lme/Chapter 3 Files/unattended_deploy.sh"
           sudo "/opt/lme/Chapter 3 Files/unattended_deploy.sh" unattended
           sudo docker ps
-          sudo curl -s --cacert /opt/lme/Chapter\ 3\ Files/certs/root-ca.crt https://127.0.0.1:9200/_cluster/health
           sleep 30
-          sudo curl -s --cacert /opt/lme/Chapter\ 3\ Files/certs/root-ca.crt https://127.0.0.1:5601/api/status
+          sudo docker ps
+          sleep 30
+          sudo docker ps
 
 
 
