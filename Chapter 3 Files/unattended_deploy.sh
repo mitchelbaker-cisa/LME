@@ -50,11 +50,11 @@ function generatepasswords() {
   echo "Starting generatepasswords"
 
   elastic_user_pass="TestPassword1"
-  kibana_system_pass="TestPassword2"
-  logstash_system_pass="TestPassword3"
-  logstash_writer="TestPassword4"
-  update_user_pass="TestPassword5"
-  kibanakey="TestKey1234567890"
+  kibana_system_pass="TestPassword1"
+  logstash_system_pass="TestPassword1"
+  logstash_writer="TestPassword1"
+  update_user_pass="TestPassword1"
+  kibanakey="TestPassword1"
   echo -e "\e[32m[X]\e[0m Updating logstash configuration with logstash writer"
   cp /opt/lme/Chapter\ 3\ Files/logstash.conf /opt/lme/Chapter\ 3\ Files/logstash.edited.conf
   sed -i "s/insertlogstashwriterpasswordhere/$logstash_writer/g" /opt/lme/Chapter\ 3\ Files/logstash.edited.conf
