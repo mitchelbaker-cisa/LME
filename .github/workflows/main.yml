@@ -19,11 +19,20 @@ jobs:
           sudo chmod +x "/opt/lme/Chapter 3 Files/unattended_deploy.sh"
           sudo "/opt/lme/Chapter 3 Files/unattended_deploy.sh" unattended
           sudo docker ps
-          sleep 30
-          sudo docker ps
-          sleep 30
-          sudo docker ps
-          docker ps -q | xargs -I {} docker logs {}
+
+      - name: Monitor Kibana Docker Container Logs
+        run: |
+          end=$((SECONDS+120)) # Run for 2 minutes (120 seconds)
+          while [ $SECONDS -lt $end ]; do
+            KIBANA_CONTAINER=$(docker ps --filter "ancestor=docker.elastic.co/kibana/kibana:8.11.1" --format "{{.ID}}")
+            if [ ! -z "$KIBANA_CONTAINER" ]; then
+              echo "Fetching logs for Kibana Container: $KIBANA_CONTAINER at $(date)"
+              docker logs $KIBANA_CONTAINER
+            else
+              echo "Kibana container not found at $(date)"
+            fi
+            sleep 5
+          done
 
 
 
