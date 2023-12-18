@@ -46,18 +46,14 @@ function customlogstashconf() {
   fi
 }
 
-generate_random_string() {
-    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
-}
-
 function generatepasswords() {
 
-  elastic_user_pass=$(generate_random_string 32)
-  kibana_system_pass=$(generate_random_string 32)
-  logstash_system_pass=$(generate_random_string 32)
-  logstash_writer=$(generate_random_string 32)
-  update_user_pass=$(generate_random_string 32)
-  kibanakey=$(generate_random_string 42)
+  elastic_user_pass=dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE
+  kibana_system_pass=HIPhq05lfssUFkkv1LoElDMwqSZyg4nH
+  logstash_system_pass=17C5AqhMrdugqKwCRrsTZBcqRAweFfr9
+  logstash_writer=UFDYu0wQPe0mF3TeuDqUW2hPp6XjQylp
+  update_user_pass=igruJgENgN62PNphKewEa3EKIPsjFcV7
+  kibanakey=RS3Z7W7rzjXAjhfclfgebR4PwUXxSPuHht8U0rAzak
 
   echo -e "\e[32m[X]\e[0m Updating logstash configuration with logstash writer"
   cp /opt/lme/Chapter\ 3\ Files/logstash.conf /opt/lme/Chapter\ 3\ Files/logstash.edited.conf
