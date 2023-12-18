@@ -19,8 +19,9 @@ jobs:
           sudo chmod +x "/opt/lme/Chapter 3 Files/unattended_deploy.sh"
           sudo "/opt/lme/Chapter 3 Files/unattended_deploy.sh" unattended
           sudo docker ps
-          curl -s --cacert /usr/share/elasticsearch/config/certificates/ca.crt https://127.0.0.1:9200/_cluster/health
-          curl -s --cacert /usr/share/elasticsearch/config/certificates/ca.crt https://127.0.0.1:5601/api/status
+          sudo curl -s --cacert /opt/lme/Chapter\ 3\ Files/certs/root-ca.crt https://127.0.0.1:9200/_cluster/health
+          sleep 30
+          sudo curl -s --cacert /opt/lme/Chapter\ 3\ Files/certs/root-ca.crt https://127.0.0.1:5601/api/status
 
 
 
