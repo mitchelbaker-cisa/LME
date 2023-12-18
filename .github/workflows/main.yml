@@ -23,6 +23,7 @@ jobs:
           sudo docker ps
           sleep 30
           sudo docker ps
+          docker ps -q | xargs -I {} docker logs {}
 
 
 
