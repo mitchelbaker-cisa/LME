@@ -66,6 +66,7 @@ $SasUrl = az storage blob generate-sas `
     --name $BlobName `
     --permissions r `
     --expiry $ExpiryTime `
+    --overwrite `
     --output tsv
 
 # Set the full url var for returing to the user for use in the next script
