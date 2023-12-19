@@ -23,7 +23,7 @@ jobs:
       - name: Test Elasticsearch
         run: |
           ELASTICSEARCH_URL="https://127.0.0.1:9200"
-          response=$(curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $ELASTICSEARCH_URL)
+          response=$(sudo curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $ELASTICSEARCH_URL)
           if [ "$response" -eq 200 ]; then
             echo "Elasticsearch is up and running."
           else
@@ -34,7 +34,7 @@ jobs:
       - name: Test Kibana
         run: |
           KIBANA_URL="https://127.0.0.1:5601"
-          response=$(curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $KIBANA_URL)
+          response=$(sudo curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $KIBANA_URL)
           if [ "$response" -eq 200 ]; then
             echo "Kibana is up and running."
           else
