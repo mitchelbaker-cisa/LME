@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-     
 
       - name: Move files and run script
         run: |
@@ -18,22 +17,30 @@ jobs:
           sudo cp -r * /opt/lme/
           cd /opt/lme
           sudo chmod +x "/opt/lme/Chapter 3 Files/unattended_deploy.sh"
-          sudo "/opt/lme/Chapter 3 Files/unattended_deploy.sh" unattended
+          sudo "/opt/lme/Chapter 3 Files/unattended_deploy.sh"
           sudo docker ps
 
-      - name: Monitor Kibana Docker Container Logs
+      - name: Test Elasticsearch
         run: |
-          end=$((SECONDS+120)) # Run for 2 minutes (120 seconds)
-          while [ $SECONDS -lt $end ]; do
-            KIBANA_CONTAINER=$(docker ps | grep 'docker.elastic.co/kibana/kibana:8.11.1' | awk '{print $1}')
-            if [ ! -z "$KIBANA_CONTAINER" ]; then
-              echo "Fetching logs for Kibana Container: $KIBANA_CONTAINER at $(date)"
-              docker logs $KIBANA_CONTAINER
-            else
-              echo "Kibana container not found at $(date)"
-            fi
-            sleep 5
-          done
+          ELASTICSEARCH_URL="https://127.0.0.1:9200"
+          response=$(curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $ELASTICSEARCH_URL)
+          if [ "$response" -eq 200 ]; then
+            echo "Elasticsearch is up and running."
+          else
+            echo "Elasticsearch is not responding."
+            exit 1
+          fi
+
+      - name: Test Kibana
+        run: |
+          KIBANA_URL="https://127.0.0.1:5601"
+          response=$(curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $KIBANA_URL)
+          if [ "$response" -eq 200 ]; then
+            echo "Kibana is up and running."
+          else
+            echo "Kibana is not responding."
+            exit 1
+          fi
 
 
 
