@@ -20,7 +20,7 @@ The username on the VM where the file will be unzipped.
 The name (and optional path) of the zip file to be unzipped.
 
 .EXAMPLE
-.\YourUnzipScript.ps1 -VMName "DC1" -ResourceGroupName "YourResourceGroupName" -VMUsername "username" -Filename "C:\path\to\filename.zip"
+.\extract_archive.ps1 -VMName "DC1" -ResourceGroupName "YourResourceGroupName" -VMUsername "username" -Filename "C:\path\to\filename.zip"
 
 This example unzips 'filename.zip' from the 'Downloads' directory of the user 'username' on the VM "DC1" in the resource group "YourResourceGroupName", and extracts it to a subdirectory named 'filename'.
 
