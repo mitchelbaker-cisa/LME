@@ -52,7 +52,8 @@ az storage blob upload `
     --file $LocalFilePath `
     --name (Split-Path $LocalFilePath -Leaf) `
     --account-name $StorageAccountName `
-    --account-key $StorageAccountKey
+    --account-key $StorageAccountKey `
+    --overwrite `
 
 
 $BlobName = (Split-Path $LocalFilePath -Leaf)
@@ -66,7 +67,6 @@ $SasUrl = az storage blob generate-sas `
     --name $BlobName `
     --permissions r `
     --expiry $ExpiryTime `
-    --overwrite `
     --output tsv
 
 # Set the full url var for returing to the user for use in the next script
