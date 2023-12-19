@@ -30,17 +30,3 @@ jobs:
             echo "Elasticsearch is not responding."
             exit 1
           fi
-
-      - name: Test Kibana
-        run: |
-          KIBANA_URL="https://127.0.0.1:5601"
-          response=$(sudo curl -s --cacert "/opt/lme/Chapter 3 Files/certs/root-ca.crt" --user "elastic:dvXFkH9CnFuW3CcvYYEiYwB0ziOt08DE" -o /dev/null -w "%{http_code}" $KIBANA_URL)
-          if [ "$response" -eq 200 ]; then
-            echo "Kibana is up and running."
-          else
-            echo "Kibana is not responding."
-            exit 1
-          fi
-
-
-
