@@ -1052,40 +1052,49 @@ function usage() {
   exit 1
 }
 
-############
-#START HERE#
-############
-export CERT_STRING='/C=US/ST=DC/L=Washington/O=CISA'
+# Function definition for main logic
+main() {
 
-#Check the script has the correct permissions to run
-if [ "$(id -u)" -ne 0 ]; then
-  echo -e "\e[31m[!]\e[0m This script must be run with root privileges"
-  exit 1
-fi
+  ############
+  #START HERE#
+  ############
+  export CERT_STRING='/C=US/ST=DC/L=Washington/O=CISA'
+  # Check the script has the correct permissions to run
+  if [ "$(id -u)" -ne 0 ]; then
+    echo -e "\e[31m[!]\e[0m This script must be run with root privileges"
+    exit 1
+  fi
 
-#Check the install location
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-if [[ "$DIR" != "/opt/lme/Chapter 3 Files" ]]; then
-  echo -e "\e[31m[!]\e[0m The deploy script is not currently within the correct path, please ensure that LME is located in /opt/lme for installation"
-  exit 1
-fi
+  # Check the install location
+  DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+  if [[ "$DIR" != "/opt/lme/Chapter 3 Files" ]]; then
+    echo -e "\e[31m[!]\e[0m The deploy script is not currently within the correct path, please ensure that LME is located in /opt/lme for installation"
+    exit 1
+  fi
 
-#Change current working directory so relative filepaths work
-cd "$DIR" || exit
+  # Change current working directory so relative filepaths work
+  cd "$DIR" || exit
 
-#What action is the user wanting to perform
-if [ "$1" == "" ]; then
-  usage
-elif [ "$1" == "install" ]; then
-  install
-elif [ "$1" == "uninstall" ]; then
-  uninstall
-elif [ "$1" == "upgrade" ]; then
-  upgrade
-elif [ "$1" == "renew" ]; then
-  renew
-elif [ "$1" == "update" ]; then
-  update
-else
-  usage
+  # What action is the user wanting to perform
+  if [ "$1" == "" ]; then
+    usage
+  elif [ "$1" == "install" ]; then
+    install
+  elif [ "$1" == "uninstall" ]; then
+    uninstall
+  elif [ "$1" == "upgrade" ]; then
+    upgrade
+  elif [ "$1" == "renew" ]; then
+    renew
+  elif [ "$1" == "update" ]; then
+    update
+  else
+    usage
+  fi
+}
+
+
+# Check if the script is being run directly or sourced
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
 fi
