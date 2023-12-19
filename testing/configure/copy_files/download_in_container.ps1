@@ -24,7 +24,7 @@ The local file path where the file will be saved. Only the filename is used.
 The username on the VM to whose Downloads directory the file will be saved.
 
 .EXAMPLE
-.\download_to_user_downloads.ps1 `
+.\download_in_container.ps1 `
     -VMName "DC1" `
     -ResourceGroupName "YourResourceGroupName" `
     -FileDownloadUrl "http://example.com/file.ext" `
