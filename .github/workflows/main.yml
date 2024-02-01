@@ -11,13 +11,13 @@ on:
          - 'release-*'
   
 jobs:
-  pullrequest_opened: 
-    name: pullrequest_opened
-    runs-on: ubuntu-latest
-    if: |
-      contains(github.event.pull_request.labels.*.name, 'feat') ||
-      contains(github.event.pull_request.labels.*.name, 'update') ||
-      contains(github.event.pull_request.labels.*.name, 'fix')
+  #pullrequest_opened: 
+  # name: pullrequest_opened
+  #  runs-on: ubuntu-latest
+  #  if: |
+  #    contains(github.event.pull_request.labels.*.name, 'feat') ||
+  #    contains(github.event.pull_request.labels.*.name, 'update') ||
+  #    contains(github.event.pull_request.labels.*.name, 'fix')
 
   lint:
     runs-on: ubuntu-latest
