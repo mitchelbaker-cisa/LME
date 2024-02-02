@@ -13,7 +13,7 @@ on:
 name: Build Release
 
 jobs: 
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,18 +22,18 @@ jobs:
       - name: Build
         run: git ls-files | zip LME-${{ inputs.version }}.zip -@
 
-      - name: Get current date 
-        id: date
+      - name: Set current date to env variable 
         run: | 
-          echo "{date}={$(date + '%Y-%m-%d')}" >> $GITHUB_STATE
+          echo "date={$(date + '%Y-%m-%d')}" >> $GITHUB_OUTPUT
+        id: version
 
       - name: Release 
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ inputs.releaseName }}
           tag_name: v${{ inputs.version }}
-          files: LME-${{ steps.tag.outputs.tag }}.zip
+          files: LME-${{ inputs.version }}.zip
           draft: true
           generate_release_notes: true 
-          body: "## [${{ steps.tag.outputs.tag }}] - Timberrrrr! - ${{ env.date }}"
+          body: "## [${{ inputs.version }}] - Timberrrrr! - ${{ steps.version.outputs.date }}"
           fail_on_unmatched_files: true
