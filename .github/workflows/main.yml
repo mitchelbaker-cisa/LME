@@ -73,7 +73,7 @@ jobs:
       - name: Get release version
         id: version
         run: |
-          echo "${${{ github.ref_name }}##*- }" >> $GITHUB_ENV
+          echo "${${GITHUB_HEAD_REF}##*- }" >> $GITHUB_ENV
 
       - name: Get current date 
         id: date
