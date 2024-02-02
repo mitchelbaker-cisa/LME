@@ -24,8 +24,8 @@ jobs:
 
       - name: Set current date to env variable 
         run: | 
-          echo "date={$(date + '%Y-%m-%d')}" >> $GITHUB_OUTPUT
-        id: version
+          echo "{date}={$(date + '%Y-%m-%d')}" >> $GITHUB_ENV
+        id: date
 
       - name: Release 
         uses: softprops/action-gh-release@v1
@@ -35,5 +35,5 @@ jobs:
           files: LME-${{ inputs.version }}.zip
           draft: true
           generate_release_notes: true 
-          body: "## [${{ inputs.version }}] - Timberrrrr! - ${{ steps.version.outputs.date }}"
+          body: "## [${{ inputs.version }}] - Timberrrrr! - ${{ env.date }}"
           fail_on_unmatched_files: true
