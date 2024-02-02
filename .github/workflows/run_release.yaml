@@ -27,7 +27,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: "LME v${{ inputs.version }}"
-          tag_name: v${{ inputs.version }}
+          tag_name: "v${{ inputs.version }}"
           files: LME-${{ steps.tag.outputs.tag }}.zip
           draft: true
           generate_release_notes: true 
