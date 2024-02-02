@@ -80,8 +80,14 @@ jobs:
         run: | 
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      - name: Build
+      - name: Build Assets
         run: git ls-files | zip LME-${{ env.version }}.zip -@
+
+      - name: Build Changelog
+        id: release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Release 
         uses: softprops/action-gh-release@v1
@@ -91,5 +97,5 @@ jobs:
           files: LME-${{ env.version }}.zip
           draft: true
           generate_release_notes: true 
-          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}"
+          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{steps.release.outputs.changelog}}"
           fail_on_unmatched_files: true
