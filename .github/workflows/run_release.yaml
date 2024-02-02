@@ -19,6 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup release version
+        run: echo ${{ github.ref_name }}
+
       - name: Build
         run: git ls-files | zip LME-${{ inputs.version }}.zip -@
 
