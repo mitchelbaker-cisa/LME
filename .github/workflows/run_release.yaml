@@ -22,12 +22,17 @@ jobs:
       - name: Build
         run: git ls-files | zip LME-${{ inputs.version }}.zip -@
 
+      - name: Get current date 
+        id: date
+        run: echo "{date}={$(date + '%Y-%m-%d')}" >> $GITHUB_STATE
+
       - name: Release 
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ inputs.releaseName }}
           tag_name: v${{ inputs.version }}
-          files: LME-${{ inputs.version }}.zip
+          files: LME-${{ steps.tag.outputs.tag }}.zip
           draft: true
           generate_release_notes: true 
+          body: "## [${{ steps.tag.outputs.tag }}] - Timberrrrr! - ${{ env.date }}"
           fail_on_unmatched_files: true
