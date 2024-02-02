@@ -35,5 +35,5 @@ jobs:
           files: LME-${{ inputs.version }}.zip
           draft: true
           generate_release_notes: true 
-          body: "## [${{ inputs.version }}] - Timberrrrr! - $date"
+          body: "## [${{ inputs.version }}] - Timberrrrr! - ${date}"
           fail_on_unmatched_files: true
