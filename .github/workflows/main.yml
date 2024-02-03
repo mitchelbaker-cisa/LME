@@ -89,7 +89,8 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v3
         with: 
           fromTag: github.head_ref
-          toTag: github.head_ref
+          toTag: github.ref
+          commitMode: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
