@@ -63,8 +63,8 @@ jobs:
           semgrep --config "p/r2c" .
 
   build-release:
-    #if: startsWith(github.head_ref, 'test-release')
-    if: github.ref == 'refs/heads/main'
+    if: startsWith(github.head_ref, 'test-release')
+    #if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: [lint, semgrep-scan]
     steps:
