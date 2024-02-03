@@ -90,7 +90,7 @@ jobs:
         with: 
           fromTag: github.head_ref
           toTag: github.ref
-          commitMode: true
+          fetchViaCommits: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
