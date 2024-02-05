@@ -112,10 +112,6 @@ jobs:
           failOnError: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Test Changelog 
-        run: | 
-          echo "${{ steps.release.outputs.changelog }}"
         
       - name: Release 
         uses: softprops/action-gh-release@v1
@@ -125,5 +121,5 @@ jobs:
           files: LME-${{ env.version }}.zip
           draft: true
           generate_release_notes: false
-          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }} ${{ steps.release.outputs.uncategorized }}"
+          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }}"
           fail_on_unmatched_files: true
