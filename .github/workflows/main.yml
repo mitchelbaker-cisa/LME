@@ -107,5 +107,5 @@ jobs:
           files: LME-${{ env.version }}.zip
           draft: true
           generate_release_notes: false
-          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }} ${{ steps.release.outputs.categorized_prs }} ${{ steps.release.outputs.uncategorized_prs }} ${{ steps.release.outputs.categorized }}"
+          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }} ${{ steps.release.outputs.uncategorized }}"
           fail_on_unmatched_files: true
