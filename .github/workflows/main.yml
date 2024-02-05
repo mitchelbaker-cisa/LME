@@ -103,16 +103,8 @@ jobs:
                     "labels": ["fix"]
                 },
                 {
-                    "title": "## 🧪 Tests",
-                    "labels": ["test"]
-                },
-                {
-                    "title": "## 💬 Other",
-                    "labels": ["other"]
-                },
-                {
-                    "title": "## 📦 Dependencies",
-                    "labels": ["dependencies"]
+                    "title": "## Uncategorized",
+                    "labels": []
                 }
               ]
             }
