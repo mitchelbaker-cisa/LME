@@ -88,8 +88,8 @@ jobs:
         id: release
         uses: mikepenz/release-changelog-builder-action@v3
         with: 
-          fromTag: github.head_ref
-          toTag: github.ref
+          #fromTag: github.head_ref
+          #toTag: github.ref
           commitMode: true
           failOnError: true
         env:
