@@ -37,7 +37,7 @@ jobs:
         with:
           name: LME v${{ inputs.version }}
           tag_name: v${{ inputs.version }}
-          files: LME-${{ inputs.version }}.zip
+          files: LME-${{ steps.tag.outputs.tag }}.zip
           draft: true
           generate_release_notes: false
           body: "## [${{ inputs.version }}] - Timberrrrr! - ${{ env.date }}\n ${{steps.release.outputs.changelog}}"
