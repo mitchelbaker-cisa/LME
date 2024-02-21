@@ -1,0 +1,44 @@
+on:
+  workflow_dispatch: 
+    inputs:
+      version:
+        description: "Release version (e.g., 1.1.0)"
+        required: true
+        type: string
+
+name: Build Release
+
+jobs: 
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get current date 
+        id: date
+        run: | 
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Build
+        run: git ls-files | zip LME-${{ inputs.version }}.zip -@
+
+      - name: Build Changelog
+        id: release
+        uses: mikepenz/release-changelog-builder-action@v3
+        with: 
+          commitMode: true
+          failOnError: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release 
+        uses: softprops/action-gh-release@v1
+        with:
+          name: LME v${{ inputs.version }}
+          tag_name: v${{ inputs.version }}
+          files: LME-${{ steps.tag.outputs.tag }}.zip
+          draft: true
+          generate_release_notes: false
+          body: "## [${{ inputs.version }}] - Timberrrrr! - ${{ env.date }}\n ${{steps.release.outputs.changelog}}"
+          fail_on_unmatched_files: true
