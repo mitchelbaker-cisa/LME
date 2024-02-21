@@ -6,9 +6,8 @@ on:
       tags:
         - 'v[0-9]+.[0-9]+.[0-9]+*'  # match basic semver tags
     pull_request:
-      branches:
-         - main
-         - 'release-*'
+      types: [opened, synchronize]
+      branches: [main, 'release-*']
   
 jobs:
   lint:
@@ -89,7 +88,7 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v3
         with: 
           fromTag: ${{ github.head_ref }}
-          toTag: ${{ github.ref }}
+          toTag: main # ${{ github.ref }}
           configurationJson: |
             {
               "template": "#{{CHANGELOG}}",
