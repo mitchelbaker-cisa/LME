@@ -6,7 +6,7 @@ on:
       tags:
         - 'v[0-9]+.[0-9]+.[0-9]+*'  # match basic semver tags
     pull_request:
-      types: [opened, synchronize]
+      types: [opened, reopened, synchronize]
       branches: [main, 'release-*']
   
 jobs:
