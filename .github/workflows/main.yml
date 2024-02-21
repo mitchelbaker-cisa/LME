@@ -87,7 +87,7 @@ jobs:
         id: release
         uses: mikepenz/release-changelog-builder-action@v3
         with: 
-          fromTag: ${{ github.head_ref }}
+          #fromTag: ${{ github.head_ref }}
           toTag: ${{ github.head_ref }} # ${{ github.ref }}
           configurationJson: |
             {
