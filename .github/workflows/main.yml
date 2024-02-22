@@ -113,7 +113,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-      - name: Release 
+      - name: Create Draft Release 
         uses: softprops/action-gh-release@v1
         with:
           name: "LME v${{ env.version }}"
