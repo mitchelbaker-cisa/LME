@@ -118,8 +118,10 @@ jobs:
         with:
           name: "LME v${{ env.version }}"
           tag_name: "v${{ env.version }}"
+          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }}"
           files: LME-${{ env.version }}.zip
           draft: true
+          prerelease: false
+          discussion_category_name: "Announcements"
           generate_release_notes: false
-          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }}"
           fail_on_unmatched_files: true
