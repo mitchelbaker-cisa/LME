@@ -122,6 +122,12 @@ jobs:
                 "method": "replace",
                 "target": "$1"
               },
+              "transformers": [
+                {
+                  "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
+                  "target": "- $4\n  - $6"
+                }
+              ],
             }
           # commitMode: true
           failOnError: true
