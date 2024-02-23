@@ -19,12 +19,6 @@
       "labels": []
     }
   ],
-  "reference": {
-    "pattern": ".*\\ \\#(.).*",
-    "on_property": "body",
-    "method": "replace",
-    "target": "$1"
-  },
   "transformers": [
     {
       "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
