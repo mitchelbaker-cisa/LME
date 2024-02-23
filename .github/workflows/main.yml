@@ -94,7 +94,7 @@ jobs:
         with: 
           #fromTag: ${{ github.head_ref }}
           toTag: ${{ github.head_ref }} # ${{ github.ref }}
-          configurationJson: "configuration.json"
+          configuration: ".github/changelog-configuration.json"
           failOnError: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
