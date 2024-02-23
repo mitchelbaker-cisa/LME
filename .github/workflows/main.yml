@@ -90,7 +90,7 @@ jobs:
 
       - name: Build Changelog
         id: release
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@v4.1.1
         with: 
           #fromTag: ${{ github.head_ref }}
           toTag: ${{ github.head_ref }} # ${{ github.ref }}
@@ -119,7 +119,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Create Draft Release 
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.15
         with:
           name: "LME v${{ env.version }}"
           tag_name: "v${{ env.version }}"
