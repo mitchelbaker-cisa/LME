@@ -123,10 +123,12 @@ jobs:
         with:
           name: "LME v${{ env.version }}"
           tag_name: "v${{ env.version }}"
-          body: "## [${{ env.version }}] - Timberrrrr! - ${{ env.date }}\n ${{ steps.release.outputs.changelog }}"
-          files: LME-${{ env.version }}.zip
           draft: true
+          body: |
+            ## [${{ env.version }}] - Timberrrrr! - ${{ env.date }} \n
+            ${{ steps.release.outputs.changelog }}
           prerelease: false
+          files: LME-${{ env.version }}.zip
           discussion_category_name: "Announcements"
           generate_release_notes: false
           fail_on_unmatched_files: true
