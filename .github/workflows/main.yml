@@ -97,7 +97,7 @@ jobs:
           configurationJson: |
             {
               "template": "#{{CHANGELOG}}",
-              "pr_template": "- #{{TITLE}} (#{{NUMBER}})",
+              "pr_template": "- #{{TITLE}} by #{{AUTHOR}}",
               "categories": [
                 {
                     "title": "## What's Added",
