@@ -1,6 +1,6 @@
 {
   "template": "#{{CHANGELOG}}",
-  "pr_template": "- #{{TITLE}} by #{{AUTHOR}}",
+  "pr_template": "* #{{TITLE}} by #{{AUTHOR}}",
   "categories": [
     {
       "title": "## What's Added",
@@ -17,12 +17,6 @@
     {
       "title": "## Uncategorized PRs",
       "labels": []
-    }
-  ],
-  "transformers": [
-    {
-      "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
-      "target": "- $4\n  - $6"
     }
   ],
 }
