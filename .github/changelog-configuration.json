@@ -1,0 +1,34 @@
+{
+  "template": "#{{CHANGELOG}}",
+  "pr_template": "- #{{TITLE}} by #{{AUTHOR}}",
+  "categories": [
+    {
+      "title": "## What's Added",
+      "labels": ["feat"]
+    },
+    {
+      "title": "## What's Fixed",
+      "labels": ["fix"]
+    },
+    {
+      "title": "## What's Updated",
+      "labels": ["update"]
+    },
+    {
+      "title": "## Uncategorized PRs",
+      "labels": []
+    }
+  ],
+  "reference": {
+    "pattern": ".*\\ \\#(.).*",
+    "on_property": "body",
+    "method": "replace",
+    "target": "$1"
+  },
+  "transformers": [
+    {
+      "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
+      "target": "- $4\n  - $6"
+    }
+  ],
+}
