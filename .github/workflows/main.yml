@@ -90,14 +90,14 @@ jobs:
 
       - name: Build Changelog
         id: release
-        uses: mikepenz/release-changelog-builder-action@v4.1.1
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
         with: 
           #fromTag: ${{ github.head_ref }}
           toTag: ${{ github.head_ref }} # ${{ github.ref }}
           configurationJson: |
             {
               "template": "#{{CHANGELOG}}",
-              "pr_template": "- #{{TITLE}} ##{{NUMBER}}",
+              "pr_template": "- #{{TITLE}} #{{NUMBER}}",
               "categories": [
                 {
                     "title": "## What's Added",
@@ -116,11 +116,6 @@ jobs:
                     "labels": []
                 }
               ],
-              "duplicate_filter": {
-                "pattern": "\\[ABC-....\\]",
-                "on_property": "title",
-                "method": "match"
-              },
               "reference": {
                 "pattern": ".*\\ \\#(.).*",
                 "on_property": "body",
@@ -134,7 +129,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Create Draft Release 
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@{latest-release}
         with:
           name: "LME v${{ env.version }}"
           tag_name: "v${{ env.version }}"
