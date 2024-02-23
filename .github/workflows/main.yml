@@ -97,7 +97,7 @@ jobs:
           configurationJson: |
             {
               "template": "#{{CHANGELOG}}",
-              "pr_template": "- #{{TITLE}}",
+              "pr_template": "- #{{TITLE}} ##{{NUMBER}}",
               "categories": [
                 {
                     "title": "## What's Added",
@@ -108,10 +108,25 @@ jobs:
                     "labels": ["fix"]
                 },
                 {
-                    "title": "## What's Added",
+                    "title": "## What's Updated",
+                    "labels": ["update"]
+                },
+                {
+                    "title": "## Uncategorized PRs",
                     "labels": []
                 }
-              ]
+              ],
+              "duplicate_filter": {
+                "pattern": "\\[ABC-....\\]",
+                "on_property": "title",
+                "method": "match"
+              },
+              "reference": {
+                "pattern": ".*\\ \\#(.).*",
+                "on_property": "body",
+                "method": "replace",
+                "target": "$1"
+              },
             }
           # commitMode: true
           failOnError: true
