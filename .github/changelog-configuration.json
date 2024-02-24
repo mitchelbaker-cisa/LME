@@ -1,6 +1,4 @@
 {
-  "template": "#{{CHANGELOG}}",
-  "pr_template": "* #{{TITLE}} by #{{AUTHOR}}",
   "categories": [
     {
       "title": "## What's Added",
@@ -19,4 +17,6 @@
       "labels": []
     }
   ],
+  "template": "#{{CHANGELOG}}",
+  "pr_template": "* #{{TITLE}} by #{{AUTHOR}}",
 }
