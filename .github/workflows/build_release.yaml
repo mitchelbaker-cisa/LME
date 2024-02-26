@@ -1,0 +1,72 @@
+on:
+  workflow_dispatch: 
+    inputs:
+      version:
+        description: "Release version (e.g., 1.1.0)"
+        required: true
+        type: string
+
+name: Build Release
+
+jobs: 
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get current date 
+        id: date
+        run: | 
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Build Assets
+        run: git ls-files | zip LME-${{ inputs.version }}.zip -@
+
+      - name: Build Changelog
+        id: release
+        uses: mikepenz/release-changelog-builder-action@v4.1.1
+        with: 
+          fromTag: "release-${{ inputs.version }}"
+          toTag: ${{ github.ref }}
+          configurationJson: |
+            {
+              "categories": [
+                {
+                  "title": "## What's Added",
+                  "labels": ["feat"]
+                },
+                {
+                  "title": "## What's Fixed",
+                  "labels": ["fix"]
+                },
+                {
+                  "title": "## What's Updated",
+                  "labels": ["update"]
+                },
+                {
+                  "title": "## Uncategorized PRs",
+                  "labels": []
+                }
+              ],
+              "template": "#{{CHANGELOG}}",
+              "pr_template": "* #{{TITLE}} by #{{AUTHOR}}",
+            }
+          failOnError: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Draft Release 
+        uses: softprops/action-gh-release@v1
+        with:
+          name: LME v${{ inputs.version }}
+          tag_name: v${{ inputs.version }}
+          body: | 
+            ## [${{ inputs.version }}] - Timberrrrr! - ${{ env.date }}
+            ${{ steps.release.outputs.changelog }}
+          files: LME-${{ inputs.version }}.zip
+          draft: true
+          prerelease: false
+          discussion_category_name: "Announcements"
+          generate_release_notes: false
+          fail_on_unmatched_files: true
