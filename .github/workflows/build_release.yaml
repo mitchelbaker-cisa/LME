@@ -27,8 +27,8 @@ jobs:
         id: release
         uses: mikepenz/release-changelog-builder-action@v4.1.1
         with: 
-          fromTag: "release-${{ inputs.version }}"
-          toTag: ${{ github.ref }}
+          toTag: "release-${{ inputs.version }}"
+          #toTag: ${{ github.ref }}
           configurationJson: |
             {
               "categories": [
