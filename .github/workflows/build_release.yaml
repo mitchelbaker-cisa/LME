@@ -29,7 +29,7 @@ jobs:
         with: 
           toTag: "release-${{ inputs.version }}"
           #toTag: ${{ github.ref }}
-          configuration: "configuration.json"
+          configuration: ".github/changelog-configuration.json"
           failOnError: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
