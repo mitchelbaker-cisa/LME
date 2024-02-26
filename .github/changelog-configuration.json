@@ -18,5 +18,5 @@
     }
   ],
   "template": "#{{CHANGELOG}}",
-  "pr_template": "* #{{TITLE}} by #{{AUTHOR}}",
+  "pr_template": "* #{{TITLE}} by #{{AUTHOR}}"
 }
