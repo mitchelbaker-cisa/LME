@@ -23,16 +23,6 @@ jobs:
       - name: Build Assets
         run: git ls-files | zip LME-${{ inputs.version }}.zip -@
 
-      - name: Build Changelog
-        id: release
-        uses: mikepenz/release-changelog-builder-action@v4.1.1
-        with: 
-          toTag: "release-${{ inputs.version }}"
-          configuration: ".github/changelog-configuration.json"
-          failOnError: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create Draft Release 
         uses: softprops/action-gh-release@v0.1.15
         with:
